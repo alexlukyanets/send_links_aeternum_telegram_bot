@@ -1,9 +1,10 @@
-# send_links_aeternum_telegram_bot
+# Aeternum telegramBot
+##Send links by text using fuzzy search
 
 # Features
-## poerty
-## alembic
-## sqlalchemy
-## fuzzywuzzy
-## docker
-## heroku deploy
+- poerty
+- alembic
+- sqlalchemy
+- fuzzywuzzy
+- docker
+- heroku deploy
