@@ -70,10 +70,11 @@ def on_message(update, context):
         print('Неудачник', chat.id, 'c сообщением:', rawtext)
 
 
-dispatcher = updater.dispatcher
-dispatcher.add_handler(CommandHandler("start", on_start))
-dispatcher.add_handler(CommandHandler("help", on_help))
-dispatcher.add_handler(MessageHandler(Filters.all, on_message))
+if __name__ == '__main__':
+    dispatcher = updater.dispatcher
+    dispatcher.add_handler(CommandHandler("start", on_start))
+    dispatcher.add_handler(CommandHandler("help", on_help))
+    dispatcher.add_handler(MessageHandler(Filters.all, on_message))
 
-updater.start_polling()
-updater.idle()
+    updater.start_polling()
+    updater.idle()
