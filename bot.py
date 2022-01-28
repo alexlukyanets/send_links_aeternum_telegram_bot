@@ -3,9 +3,9 @@ import os
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from dotenv import load_dotenv
 
-print("Бот запущен. Нажмите Ctrl+C для завершения")
-
 load_dotenv()
+
+print("Бот запущен. Нажмите Ctrl+C для завершения")
 
 TOKEN = os.getenv('TOKEN', '')
 

@@ -6,8 +6,9 @@ from sqlalchemy import engine_from_config, pool
 
 import sys
 from pathlib import Path
+
 sys.path.append(str(Path(__file__).absolute().parent.parent))
-from helpers import mysql_connection_string  # noqa
+from database.mysql_connection_string import mysql_connection_string  # noqa
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -21,7 +22,9 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+from database.models.song import Song
+
+target_metadata = Song.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -50,20 +53,14 @@ def run_migrations_offline():
 
 
 def run_migrations_online():
-    """Run migrations in 'online' mode.
+    engine = engine_from_config(
+        config.get_section(config.config_ini_section), prefix='sqlalchemy.')
 
-    In this scenario we need to create an Engine
-    and associate a connection with the context.
-
-    """
-    connectable = engine_from_config(
-        config.get_section(config.config_ini_section),
-        prefix="sqlalchemy.",
-        poolclass=pool.NullPool,
-    )
-
-    with connectable.connect() as connection:
-        context.configure(connection=connection, target_metadata=target_metadata)
+    with engine.connect() as connection:
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata
+        )
 
         with context.begin_transaction():
             context.run_migrations()
