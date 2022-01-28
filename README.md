@@ -1,10 +1,10 @@
 # Aeternum telegramBot
 
 ## Run project
-* poetry install
+* run: poetry install
 * set your env data
 * create database locally
-* alembic upgrade head
+* run: alembic upgrade head
 
 ## Send links by text using fuzzy search
 
