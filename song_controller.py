@@ -32,11 +32,17 @@ class SongController:
     def smart_find_song(self, song_name):
         songs_dict = self.select_all_songs()
         found_name, ratio = process.extractOne(song_name, songs_dict.keys())
+        if ratio < self.minimum_valid_rating():
+            return
         return songs_dict.get(found_name)
 
     def compile_execute_selection(self, stmt):
         stmt_compiled = stmt.compile(compile_kwargs={"literal_binds": True}, dialect=mysql.dialect())
         return self.connection.execute(str(stmt_compiled))
+
+    @staticmethod
+    def minimum_valid_rating():
+        return 70
 
 
 if __name__ == '__main__':
