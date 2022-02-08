@@ -32,7 +32,7 @@ class SongController:
     def smart_find_song(self, song_name):
         songs_dict = self.select_all_songs()
         found_name, ratio = process.extractOne(song_name, songs_dict.keys())
-        if ratio < self.minimum_valid_rating():
+        if ratio < self.minimum_valid_ratio():
             return
         return songs_dict.get(found_name)
 
@@ -41,7 +41,7 @@ class SongController:
         return self.connection.execute(str(stmt_compiled))
 
     @staticmethod
-    def minimum_valid_rating():
+    def minimum_valid_ratio():
         return 70
 
 
