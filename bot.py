@@ -9,6 +9,8 @@ from song_controller import SongController
 load_dotenv()
 
 TOKEN = os.getenv('TOKEN', '')
+PORT = int(os.environ.get('PORT', 5000))
+
 updater = Updater(TOKEN, use_context=True)
 song_controller = SongController()
 
@@ -42,5 +44,8 @@ if __name__ == '__main__':
     dispatcher.add_handler(CommandHandler("help", on_help))
     dispatcher.add_handler(MessageHandler(Filters.all, on_message))
 
-    updater.start_polling()
+    updater.start_webhook(listen="0.0.0.0",
+                          port=int(PORT),
+                          url_path=TOKEN)
+    updater.bot.setWebhook('https://aeternum-notes-bot.herokuapp.com/' + TOKEN)
     updater.idle()
