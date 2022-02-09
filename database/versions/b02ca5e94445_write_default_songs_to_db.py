@@ -28,7 +28,7 @@ engine = sa.create_engine(mysql_connection_string())
 def upgrade():
     with engine.connect() as connection:
         for row in csvreader:
-            song_dict = {'name': row[0].lower(),
+            song_dict = {'name': row[0],
                          'url': row[1],
                          'keywords': row[2].lower()}
 
