@@ -37,7 +37,7 @@ class SongController:
 
     def compile_execute_selection(self, stmt):
         stmt_compiled = stmt.compile(compile_kwargs={"literal_binds": True}, dialect=mysql.dialect())
-        return self.connection.execute(str(stmt_compiled))
+        return self.engine.execute(str(stmt_compiled))
 
 
 if __name__ == '__main__':
